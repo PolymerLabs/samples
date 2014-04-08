@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../components/platform/platform.js"></script>
+        <link rel="import" href="demo-tabs.html">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    </head>
+    <body>
+
+	<demo-tabs selected="0">
+	  <demo-tab heading="proto-element.html">
+	  <div>
+	    <pre><code class="html">&lt;link rel=&quot;import&quot;
+	      href=&quot;/components/polymer/polymer.html&quot;&gt;
+
+	&lt;polymer-element name=&quot;proto-element&quot;&gt;
+	  &lt;template&gt;
+	    &lt;span&gt;I&#39;m &lt;b&gt;proto-element&lt;/b&gt;. Check out my prototype.&lt;/span&gt;
+	  &lt;/template&gt;
+	  &lt;script&gt;
+	    Polymer(&#39;proto-element&#39;, {
+	      ready: function() {
+	        //...
+	      }
+	    });
+	  &lt;/script&gt;
+	&lt;/polymer-element&gt;</code></pre>
+	  </div>
+
+	  </demo-tab>
+	  <demo-tab heading="index.html">
+	  <div>
+	    <pre><code class="html">&lt;!DOCTYPE html&gt;
+	&lt;html&gt;
+	  &lt;head&gt;
+	    &lt;script src=&quot;platform.js&quot;&gt;&lt;/script&gt;
+	    &lt;link rel=&quot;import&quot; href=&quot;proto-element.html&quot;&gt;
+	  &lt;/head&gt;
+	  &lt;body&gt;
+	    &lt;proto-element&gt;&lt;/proto-element&gt;
+	  &lt;/body&gt;
+	&lt;/html&gt;</code></pre>
+	  </div>
+
+	  </demo-tab>
+	  <div class="result">
+	    <proto-element></proto-element>
+	  </div>
+	</demo-tabs>
+
+    </body>
+</html>

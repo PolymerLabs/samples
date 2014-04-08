@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+
+	<input type="button" value="Try it out" id="btn">
+
+<script type="text/html" id="source-html">
+<html>
+<head>
+<script src="//cdnjs.cloudflare.com/ajax/libs/polymer/0.2.2/platform.js"><\/script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/polymer/0.2.2/polymer.js"><\/script>
+</head>
+<body>
+
+	<polymer-element name="tk-element" noscript>
+	  <template>
+	    <span>I'm <b>tk-element</b>. This is my Shadow DOM.</span>
+	  </template>
+	</polymer-element>
+
+	<!-- Using my-element -->
+	<tk-element></tk-element>
+  
+</body>
+</html>
+</script>
+	  
+<script type="text/html" id="source-css">
+body {
+  background: pink;
+  margin: 0;
+}
+</script>
+	  
+<script type="text/html" id="source-javascript">
+// Nothing to see here
+</script>
+
+	<script>
+	(function(){
+
+		var btn = document.getElementById('btn');
+
+		btn.addEventListener('click', function() {
+		  var sources = ['html', 'css', 'javascript'];
+		  var form = document.createElement('form');
+		  var source;
+		  var input;
+		  form.setAttribute('method', 'post');
+		  form.setAttribute('action', 'http://jsbin.com');
+		  form.setAttribute('target', '_blank');
+		  form.style.display = 'none';
+		  for (var i = 0; i < sources.length; i++) {
+		    source = document.getElementById('source-' + sources[i]);
+		    input = document.createElement('input');
+		    form.appendChild(input);
+		    input.type = 'hidden';
+		    input.name = sources[i];
+		    input.value = source.innerHTML.replace(/<\\/g,'<');
+		    //console.log(input.value);
+
+		  }
+		  //form.submit();
+		});
+
+	})();
+	</script>
+
+    </body>
+</html>

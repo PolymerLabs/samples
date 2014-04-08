@@ -1,0 +1,79 @@
+<link rel="import" href="../components/polymer-selector/polymer-selector.html">
+<link rel="import" href="../components/polymer/polymer.html">
+
+
+<polymer-element name="demo-tab" attributes="heading" noscript>
+  <template>
+    <style>
+      :host {
+        display: none;
+      }
+      :host(.selected) {
+        display: block;
+      }
+    </style>
+    <content></content>
+  </template>
+</polymer-element>
+
+
+<polymer-element name="demo-tabs" attributes="selected">
+  <template>
+    <link rel="stylesheet" href="demo-tabs.css">
+    <div id="container">
+    <button on-click="{{openSample}}">Try it out</button>
+      <div class="tab-strip">
+        <polymer-selector selected="{{selected}}" selectedClass="selected" class="tab-wrapper">
+          <template repeat="{{panel in panels}}">
+            <span>{{panel.heading}}</span>
+          </template>
+        </polymer-selector>
+        
+      </div>
+      <div id="wrapper">
+        <polymer-selector id="contents" selected="{{selected}}" selectedClass="selected">
+          <content id="contentpanels" select="demo-tab"></content>
+        </polymer-selector>
+        <div id="results" class="show">
+          <content id="contentresults" select=".result"></content>
+        </div>
+      </div>
+    </div>
+
+
+  </template>
+  <script>
+    Polymer('demo-tabs', {
+      selected: 0,
+      attached: function() {
+        this.updatePanels();
+      },
+      updatePanels: function() {
+        this.panels = Array.prototype.slice.call(
+            this.$.contentpanels.getDistributedNodes());
+        this.$.results.classList.toggle(
+            'show', this.$.contentresults.getDistributedNodes().length);
+        this.onMutation(this, this.updatePanels); // Watch changes to light dom.
+      },
+      openSample: function(){
+        var results = this.$.contentresults.getDistributedNodes()[0].innerHTML;
+        var content = decodeURIComponent(this.$.contentpanels.getDistributedNodes()[0].innerHTML);
+        var startTemplate = '';
+        var endTemplate = '';
+        //console.log(results, content);
+        var form = document.createElement('form');
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', 'http://jsbin.com');
+        form.setAttribute('target', '_blank');
+        form.style.display = 'none';
+        var source = startTemplate + content + results + endTemplate;
+        var input = document.createElement('input');
+        form.appendChild(input);
+        input.type = 'hidden';
+        input.name = 'html';
+        input.value = source.replace(/<\\/g,'<');
+        form.submit();        
+      }
+    });
+  </script>
+</polymer-element>

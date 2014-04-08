@@ -1,0 +1,11 @@
+{
+  "name": "samples",
+  "version": "0.0.0",
+  "homepage": "https://github.com/PolymerLabs/samples",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "polymer": "~0.2.2",
+    "polymer-selector": "Polymer/polymer-selector#~0.2.2"
+  }
+}
