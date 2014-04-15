@@ -40,7 +40,6 @@
       </div>
     </div>
 
-
   </template>
   <script>
     Polymer('demo-tabs', {
@@ -57,10 +56,15 @@
       },
       openSample: function(){
         var results = this.$.contentresults.getDistributedNodes()[0].innerHTML;
-        var content = decodeURIComponent(this.$.contentpanels.getDistributedNodes()[0].innerHTML);
-        var startTemplate = '';
-        var endTemplate = '';
-        //console.log(results, content);
+        var content = decodeURIComponent(this.$.contentpanels.getDistributedNodes()[0].innerText);
+        var startTemplate = 
+"<html> \n\
+   <head> \n\
+     <script src='//cdnjs.cloudflare.com/ajax/libs/polymer/0.2.2/platform.js'><\/script> \n\
+     <script src='//cdnjs.cloudflare.com/ajax/libs/polymer/0.2.2/polymer.js'><\/script> \n\
+    </head> \n\
+<body>\n\ ";
+        var endTemplate = '\n\<body>\n\</html>';
         var form = document.createElement('form');
         form.setAttribute('method', 'post');
         form.setAttribute('action', 'http://jsbin.com');
@@ -71,7 +75,7 @@
         form.appendChild(input);
         input.type = 'hidden';
         input.name = 'html';
-        input.value = source.replace(/<\\/g,'<');
+        input.value = source.replace('<link rel="import" href="/components/polymer/polymer.html">','');
         form.submit();        
       }
     });

@@ -1,0 +1,54 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/polymer-ajax/polymer-ajax.html">
+
+<!--
+<jsbin-link src="http://www.polymer-project.org/components/polymer-ajax/demo.html"></jsbin-link>
+-->
+<polymer-element name="jsbin-link" attributes="src">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+      <button on-click="{{tryit}}">try</button>
+      <polymer-ajax id="xhr" url="{{src}}" handleAs="text" response="{{response}}"></polymer-ajax>
+  </template>
+  <script>
+    Polymer('jsbin-link', {
+      response: null,
+      ready: function(){
+        console.log('element ready');
+      },
+      responseChanged: function() {
+        console.log(this.response);
+        this.openSample(this.response);
+      },
+      tryit: function(){
+        this.$.xhr.go();
+      },
+      openSample: function (html) {
+        var form = document.createElement('form');
+        //var source;
+        var sources = ['html', 'css', 'js'];
+        sources['html'] = html;
+        var input;
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', 'http://jsbin.com');
+        form.setAttribute('target', '_blank');
+        form.style.display = 'none';
+        
+        for (var i = 0; i < sources.length; i++) {
+          source = document.getElementById('source-' + sources[i]);
+          input = document.createElement('input');
+          form.appendChild(input);
+          input.type = 'hidden';
+          input.name = sources[i];
+          input.value = html.replace(/<\\/g,'<');
+
+        }
+        form.submit();        
+      }
+    });
+  </script>
+</polymer-element>
