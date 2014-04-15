@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "polymer": "~0.2.2",
-    "polymer-selector": "Polymer/polymer-selector#~0.2.2"
+    "polymer-selector": "Polymer/polymer-selector#~0.2.2",
+    "polymer-ajax": "Polymer/polymer-ajax#~0.2.2"
   }
 }
